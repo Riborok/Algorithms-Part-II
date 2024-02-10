@@ -15,10 +15,7 @@ public class Outcast {
         String outcastNoun = null;
 
         for (String noun : nouns) {
-            int distance = 0;
-            for (String other : nouns)
-                if (!noun.equals(other))
-                    distance += wordnet.distance(noun, other);
+            int distance = calcDistance(noun, nouns);
 
             if (distance > maxDistance) {
                 maxDistance = distance;
@@ -27,6 +24,15 @@ public class Outcast {
         }
 
         return outcastNoun;
+    }
+
+    private int calcDistance(String noun, String[] nouns) {
+        int distance = 0;
+        for (String other : nouns)
+            if (!noun.equals(other))
+                distance += wordnet.distance(noun, other);
+
+        return distance;
     }
 
     public static void main(String[] args) {
